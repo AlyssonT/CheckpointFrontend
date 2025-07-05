@@ -13,4 +13,9 @@
   --color-error: #ff0000;
   --text-primary: #ffffff;
   --font-futura: "futura-heavy-bt", sans-serif;
+  --screen-minus-header: calc(100vh - 4rem);
+}
+
+body {
+  color: var(--text-primary);
 }
