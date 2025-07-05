@@ -11,6 +11,7 @@
   --color-tertiary: #d9d9d9;
   --color-focus: #ffb74d;
   --color-error: #ff0000;
+  --color-inputbg: #313131;
   --text-primary: #ffffff;
   --font-futura: "futura-heavy-bt", sans-serif;
   --screen-minus-header: calc(100vh - 4rem);
