@@ -10,7 +10,9 @@
   --color-secondary: #e96900;
   --color-tertiary: #d9d9d9;
   --color-focus: #ffb74d;
-  --color-error: #ff0000;
+  --color-success: #25451d;
+  --color-warning: #44451d;
+  --color-error: #451d1d;
   --color-inputbg: #313131;
   --text-primary: #ffffff;
   --font-futura: "futura-heavy-bt", sans-serif;

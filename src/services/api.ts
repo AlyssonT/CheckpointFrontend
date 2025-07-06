@@ -1,5 +1,18 @@
 import axios from "axios";
 
+export type APIResponse<T = unknown> = {
+  data: T;
+  statusCode: number;
+  message: string;
+};
+
+export function throwErrorWithAPIMessage(err: unknown) {
+  if (axios.isAxiosError<APIResponse>(err) && err.response) {
+    throw Error(err.response.data.message);
+  }
+  throw Error("Unknown error.");
+}
+
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: {

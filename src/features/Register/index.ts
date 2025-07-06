@@ -1,1 +1,1 @@
-export { RegisterView as Register } from "./view/Register";
+export { RegisterView as Register } from "./view/RegisterView";

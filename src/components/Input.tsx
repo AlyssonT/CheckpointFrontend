@@ -1,64 +1,46 @@
 import React from "react";
-import type { UseFormControl } from "../hooks/useForm";
+import {
+  type FieldValues,
+  type Path,
+  type UseFormRegister,
+} from "react-hook-form";
 
-interface InputProps<T> extends React.InputHTMLAttributes<HTMLInputElement> {
-  className?: string;
-  label?: string;
-  control?: UseFormControl<T>;
-}
+const baseStyles =
+  "bg-inputbg rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-secondary";
 
-export function Input<T>({
-  type = "text",
-  className = "",
+type InputProps<T extends FieldValues> =
+  React.InputHTMLAttributes<HTMLInputElement> & {
+    className?: string;
+    label?: string;
+    error?: string;
+    register?: UseFormRegister<T>;
+    name: Path<T>;
+  };
+
+export function Input<T extends FieldValues>({
   label,
   name,
+  type = "text",
+  className = "",
+  error,
   disabled = false,
-  control,
+  register,
   ...props
 }: InputProps<T>) {
-  const baseStyles =
-    "bg-inputbg rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-secondary";
-
-  const getInputValue = (name?: string) => {
-    if (!control || !name) return "";
-    const value = control.getValues(name as keyof T);
-    return value !== undefined && value !== null ? String(value) : "";
-  };
-
-  const parseValue = (value: string, inputType: string) => {
-    if (!value) return value;
-
-    switch (inputType) {
-      case "number": {
-        const numValue = parseFloat(value);
-        return isNaN(numValue) ? value : numValue;
-      }
-      case "checkbox":
-        return value === "true";
-      default:
-        return value;
-    }
-  };
-
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (control && name) {
-      const parsedValue = parseValue(e.target.value, type);
-      control.setValue(name as keyof T, parsedValue as T[keyof T]);
-    }
-  };
-
   return (
     <>
       {label && <label htmlFor={name}>{label}</label>}
       <input
         type={type}
-        className={`${baseStyles} ${className}`}
         id={name}
+        className={`${baseStyles} ${className} ${
+          error ? "border-red-500" : ""
+        }`}
         disabled={disabled}
-        value={getInputValue(name)}
-        onChange={onChangeHandler}
+        {...(register && name ? register(name) : {})}
         {...props}
       />
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </>
   );
 }
