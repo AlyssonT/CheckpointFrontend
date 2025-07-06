@@ -1,6 +1,6 @@
 const variantMapClass: Record<string, string> = {
   contained:
-    "bg-secondary text-primary hover:bh-secondary-dark rounded transition-colors",
+    "bg-secondary text-black hover:bh-secondary-dark rounded transition-colors",
   outlined:
     "border-secondary border-2  hover:bg-secondary-dark transition-colors",
   ghost: " hover:bg-secondary-dark transition-colors",

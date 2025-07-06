@@ -1,8 +1,7 @@
 import React from "react";
 import type { UseFormControl } from "../hooks/useForm";
 
-interface InputProps<T = unknown>
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps<T> extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   label?: string;
   control?: UseFormControl<T>;
@@ -17,7 +16,8 @@ export function Input<T>({
   control,
   ...props
 }: InputProps<T>) {
-  const baseStyles = "bg-inputbg rounded px-4 py-2";
+  const baseStyles =
+    "bg-inputbg rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-secondary";
 
   const getInputValue = (name?: string) => {
     if (!control || !name) return "";
@@ -49,10 +49,11 @@ export function Input<T>({
 
   return (
     <>
-      {label && <label>{label}</label>}
+      {label && <label htmlFor={name}>{label}</label>}
       <input
         type={type}
         className={`${baseStyles} ${className}`}
+        id={name}
         disabled={disabled}
         value={getInputValue(name)}
         onChange={onChangeHandler}
