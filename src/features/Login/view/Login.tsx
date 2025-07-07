@@ -1,7 +1,7 @@
+import { useForm } from "react-hook-form";
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 import { Paper } from "../../../components/Paper";
-import { useForm } from "../../../hooks/useForm";
 
 interface LoginForm {
   email: string;
@@ -9,7 +9,7 @@ interface LoginForm {
 }
 
 export function LoginView() {
-  const { control } = useForm<LoginForm>();
+  const { register } = useForm<LoginForm>();
 
   return (
     <div className="h-(--screen-minus-header) flex justify-center items-center">
@@ -18,13 +18,13 @@ export function LoginView() {
           Login
         </h1>
         <form className="flex flex-col gap-4">
-          <Input type="email" name="email" label="Email" control={control} />
+          <Input type="email" name="email" label="Email" register={register} />
           <Input
             type="password"
             name="password"
             label="Senha"
             required
-            control={control}
+            register={register}
           />
         </form>
         <div className="flex justify-end mt-8">
