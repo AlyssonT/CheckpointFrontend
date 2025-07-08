@@ -5,7 +5,7 @@ import { ToastContextProvider } from "../../../contexts/Toast/ToastProvider";
 
 export function RootPageView() {
   return (
-    <>
+    <div className="bg-primary min-h-screen">
       <ToastContextProvider>
         <HeaderView />
         <Toast />
@@ -13,6 +13,6 @@ export function RootPageView() {
           <Outlet />
         </div>
       </ToastContextProvider>
-    </>
+    </div>
   );
 }

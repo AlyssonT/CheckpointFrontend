@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
 import {
   ToastContext,
   type ToastContextValues,
@@ -13,20 +13,20 @@ export function ToastContextProvider({ children }: { children: ReactNode }) {
     type: "success",
   });
 
-  const openToast = (message: string, type?: ToastType) => {
+  const openToast = useCallback((message: string, type?: ToastType) => {
     setToastData({
       open: true,
       message,
       type: type ?? "success",
     });
-  };
+  }, []);
 
-  const closeToast = () => {
+  const closeToast = useCallback(() => {
     setToastData((prev) => ({
       ...prev,
       open: false,
     }));
-  };
+  }, []);
 
   const values: ToastContextValues = useMemo(
     () => ({
@@ -34,7 +34,7 @@ export function ToastContextProvider({ children }: { children: ReactNode }) {
       openToast,
       closeToast,
     }),
-    [toastData],
+    [closeToast, openToast, toastData],
   );
 
   return (

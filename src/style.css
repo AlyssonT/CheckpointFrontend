@@ -1,6 +1,6 @@
 @font-face {
   font-family: "futura-heavy-bt";
-  src: url("../public/futura-heavy-bt.ttf") format("truetype");
+  src: url("/src/assets/fonts/futura-heavy-bt.ttf") format("truetype");
 }
 
 @import "tailwindcss";

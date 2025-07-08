@@ -1,5 +1,11 @@
 import { useContext, useEffect } from "react";
-import { ToastContext } from "../contexts/Toast/ToastContext";
+import { ToastContext, type ToastType } from "../contexts/Toast/ToastContext";
+
+const colorByType: Record<ToastType, string> = {
+  success: "bg-success",
+  warning: "bg-warning",
+  error: "bg-error",
+};
 
 export function Toast() {
   const { toastData, closeToast } = useContext(ToastContext);
@@ -8,16 +14,16 @@ export function Toast() {
     if (toastData.open) {
       const timeout = setTimeout(() => {
         closeToast();
-      }, 5000);
+      }, 10000);
       return () => clearTimeout(timeout);
     }
   }, [closeToast, toastData.open]);
 
-  const colorByType = "bg-" + toastData.type;
+  const color = colorByType[toastData.type];
 
   return (
     <div
-      className={`fixed bottom-8 right-8 ${colorByType} min-w-80 rounded shadow-lg px-4 py-2 ${
+      className={`fixed bottom-8 right-8 ${color} min-w-80 rounded shadow-lg px-4 py-2 ${
         toastData.open ? "pointer-events-auto" : "pointer-events-none"
       } transition-opacity duration-500 ${
         toastData.open ? "opacity-100" : "opacity-0"

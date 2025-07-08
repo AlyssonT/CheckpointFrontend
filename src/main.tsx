@@ -5,8 +5,6 @@ import { router } from "./routes";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <div className="bg-primary min-h-screen">
-      <RouterProvider router={router} />
-    </div>
+    <RouterProvider router={router} />
   </StrictMode>,
 );
