@@ -1,7 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useSubmit, useActionData, useNavigation } from "react-router";
+import {
+  useSubmit,
+  useActionData,
+  useNavigation,
+  useNavigate,
+} from "react-router";
 import { ToastContext } from "../../../contexts/Toast/ToastContext";
 import type { ActionData } from "../../../types/actions";
 import { type RegisterForm, registerSchema } from "../models/registerModels";
@@ -9,10 +14,11 @@ import { type RegisterForm, registerSchema } from "../models/registerModels";
 export function useRegisterController() {
   const { register, handleSubmit, formState } = useForm<RegisterForm>({
     resolver: zodResolver(registerSchema),
-    reValidateMode: "onBlur",
+    mode: "onBlur",
   });
 
   const navigation = useNavigation();
+  const navigate = useNavigate();
   const isSubmitting = navigation.state !== "idle";
 
   const { openToast } = useContext(ToastContext);
@@ -30,6 +36,7 @@ export function useRegisterController() {
     if (!actionData) return;
     if (actionData.success) {
       openToast(actionData.message ?? "");
+      navigate("/");
     } else {
       openToast(actionData.error ?? "", "error");
     }

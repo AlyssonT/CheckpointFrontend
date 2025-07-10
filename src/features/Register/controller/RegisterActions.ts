@@ -1,3 +1,4 @@
+import { setToken } from "../../../utils/auth";
 import { registerSchema } from "../models/registerModels";
 import { RegisterUser } from "../service/registerServices";
 import * as z from "zod/v4";
@@ -16,6 +17,7 @@ export async function registerUserAction({ request }: { request: Request }) {
     }
 
     const responseData = await RegisterUser(result.data);
+    setToken(responseData?.data);
 
     return {
       success: true,
