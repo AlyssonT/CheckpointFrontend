@@ -1,6 +1,7 @@
 import { Button } from "../../../components/Button";
 import { CiSearch } from "react-icons/ci";
 import { useHeaderController } from "../controller/HeaderController";
+import { Popover } from "../../../components/Popover";
 
 export function HeaderView() {
   const {
@@ -9,6 +10,8 @@ export function HeaderView() {
     handleRegisterClick,
     handleSearchChange,
     handleSearch,
+    user,
+    isLoggedIn,
   } = useHeaderController();
 
   return (
@@ -35,13 +38,34 @@ export function HeaderView() {
           </span>
         </div>
       </div>
-      <div className="flex justify-end space-x-2 mr-4">
-        <Button variant="contained" size="sm" onClick={handleLoginClick}>
-          Entrar
-        </Button>
-        <Button variant="outlined" size="sm" onClick={handleRegisterClick}>
-          Cadastrar
-        </Button>
+      <div className="flex justify-end mr-8">
+        {isLoggedIn ? (
+          <Popover
+            anchor={
+              <div className="flex space-x-2 items-center">
+                <img
+                  src="/logo_typography.svg"
+                  alt="avatar"
+                  width={50}
+                  height={50}
+                  className="rounded border-secondary border-2"
+                />
+                <p>{user.name}</p>
+              </div>
+            }
+          >
+            opção
+          </Popover>
+        ) : (
+          <div className="flex space-x-2">
+            <Button variant="contained" size="sm" onClick={handleLoginClick}>
+              Login
+            </Button>
+            <Button variant="outlined" size="sm" onClick={handleRegisterClick}>
+              Sign Up
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   );

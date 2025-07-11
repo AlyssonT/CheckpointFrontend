@@ -11,7 +11,7 @@ export function RegisterView() {
     <div className="h-(--screen-minus-header) flex justify-center items-center">
       <Paper className="w-100 min-h-140 p-6">
         <h1 className="text-2xl font-bold mb-8 border-b-1 border-secondary">
-          Cadastro
+          Sign Up
         </h1>
         <form
           noValidate
@@ -20,34 +20,34 @@ export function RegisterView() {
         >
           <Input
             name="name"
-            label="Nome de usuário"
+            label="Username"
             register={register}
             error={formState.errors.name?.message}
           />
           <Input
             type="email"
             name="email"
-            label="Email"
+            label="E-mail"
             register={register}
             error={formState.errors.email?.message}
           />
           <Input
             type="password"
             name="password"
-            label="Senha"
+            label="Password"
             error={formState.errors.password?.message}
             register={register}
           />
           <Input
             type="password"
             name="confirmPassword"
-            label="Confirmação de senha"
+            label="Confirm password"
             error={formState.errors.confirmPassword?.message}
             register={register}
           />
           <div className="flex justify-end mt-6">
             <Button type="submit" loading={isSubmitting}>
-              Cadastrar
+              Send
             </Button>
           </div>
         </form>

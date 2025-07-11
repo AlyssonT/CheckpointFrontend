@@ -11,7 +11,7 @@ export function LoginView() {
     <div className="h-(--screen-minus-header) flex justify-center items-center">
       <Paper className="w-100 min-h-90 p-6">
         <h1 className="text-2xl font-bold mb-8 border-b-1 border-secondary">
-          Login
+          Log In
         </h1>
         <form
           className="flex flex-col gap-4"
@@ -20,20 +20,20 @@ export function LoginView() {
         >
           <Input
             name="email"
-            label="Email"
+            label="E-mail"
             register={register}
             error={formState.errors.email?.message}
           />
           <Input
             type="password"
             name="password"
-            label="Senha"
+            label="Password"
             register={register}
             error={formState.errors.password?.message}
           />
           <div className="flex justify-end mt-8">
             <Button type="submit" loading={isSubmitting}>
-              Entrar
+              Log In
             </Button>
           </div>
         </form>
