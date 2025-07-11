@@ -1,13 +1,13 @@
-import { registerSchema } from "../models/registerModels";
-import { RegisterUser } from "../service/registerServices";
 import * as z from "zod/v4";
+import { loginSchema } from "../model/loginModels";
+import { LoginUser } from "../service/loginServices";
 
-export async function registerUserAction({ request }: { request: Request }) {
+export async function loginAction({ request }: { request: Request }) {
   try {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
 
-    const result = registerSchema.safeParse(data);
+    const result = loginSchema.safeParse(data);
     if (!result.success) {
       return {
         success: false,
@@ -15,12 +15,12 @@ export async function registerUserAction({ request }: { request: Request }) {
       };
     }
 
-    const responseData = await RegisterUser(result.data);
+    const responseData = await LoginUser(result.data);
     const token = responseData?.data;
 
     return {
       success: true,
-      message: responseData?.message ?? "Registration successful.",
+      message: responseData?.message ?? "Login successful. Welcome.",
       data: token,
     };
   } catch (error) {

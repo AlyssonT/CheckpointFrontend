@@ -1,36 +1,36 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { loginSchema, type LoginForm } from "../model/loginModels";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  useSubmit,
   useActionData,
-  useNavigation,
   useNavigate,
+  useNavigation,
+  useSubmit,
 } from "react-router";
-import { ToastContext } from "../../../contexts/Toast/ToastContext";
 import type { ActionData } from "../../../types/actions";
-import { type RegisterForm, registerSchema } from "../models/registerModels";
-import { jwtDecode } from "jwt-decode";
+import { useContext, useEffect } from "react";
+import { ToastContext } from "../../../contexts/Toast/ToastContext";
 import { useAuthStore, type UserData } from "../../../stores/authStore";
+import { jwtDecode } from "jwt-decode";
 
-export function useRegisterController() {
-  const { register, handleSubmit, formState } = useForm<RegisterForm>({
-    resolver: zodResolver(registerSchema),
+export function useLoginController() {
+  const { register, handleSubmit, formState } = useForm<LoginForm>({
+    resolver: zodResolver(loginSchema),
     mode: "onBlur",
   });
   const login = useAuthStore((state) => state.login);
+
+  const { openToast } = useContext(ToastContext);
 
   const navigation = useNavigation();
   const navigate = useNavigate();
   const isSubmitting = navigation.state !== "idle";
 
-  const { openToast } = useContext(ToastContext);
-
   const submit = useSubmit();
-  const onSubmit = (data: RegisterForm) => {
+  const onSubmit = (data: LoginForm) => {
     submit(data, {
       method: "post",
-      action: "/register",
+      action: "/login",
     });
   };
 
@@ -55,8 +55,8 @@ export function useRegisterController() {
   return {
     register,
     handleSubmit,
+    formState,
     onSubmit,
     isSubmitting,
-    formState,
   };
 }
