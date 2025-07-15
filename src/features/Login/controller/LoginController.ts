@@ -44,6 +44,7 @@ export function useLoginController() {
         name: payload.name,
         email: payload.email,
         id: payload.id,
+        exp: payload.exp,
         token: actionData.data,
       });
       navigate("/");
