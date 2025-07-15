@@ -22,6 +22,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   loading?: boolean;
+  noFocusRing?: boolean;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children?: React.ReactNode;
@@ -34,12 +35,16 @@ export function Button({
   className = "",
   disabled = false,
   loading = false,
+  noFocusRing = false,
   onClick,
   children,
   ...props
 }: ButtonProps) {
-  const baseStyles =
-    "rounded transition-colors duration-200 font-medium focus:outline-none focus:ring-1 focus:ring-focus disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer relative";
+  const focusStyles = noFocusRing
+    ? "focus:outline-none focus:ring-0"
+    : "focus:outline-none focus:ring-1 focus:ring-focus";
+
+  const baseStyles = `rounded transition-colors duration-200 font-medium ${focusStyles} disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer relative`;
 
   return (
     <button

@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { ToastContext, type ToastType } from "../contexts/Toast/ToastContext";
+import { Button } from "./Button";
 
 const colorByType: Record<ToastType, string> = {
   success: "bg-success",
@@ -23,7 +24,7 @@ export function Toast() {
 
   return (
     <div
-      className={`fixed bottom-8 right-8 ${color} min-w-80 rounded shadow-lg px-4 py-2 ${
+      className={`fixed flex justify-between items-center bottom-8 right-8 ${color} min-w-80 rounded shadow-lg px-4 py-2 ${
         toastData.open ? "pointer-events-auto" : "pointer-events-none"
       } transition-opacity duration-500 ${
         toastData.open ? "opacity-100" : "opacity-0"
@@ -33,7 +34,9 @@ export function Toast() {
         {toastData.message.charAt(0).toLocaleUpperCase() +
           toastData.message.slice(1)}
       </p>
-      <button onClick={closeToast}>fechar</button>
+      <Button variant="ghost" noFocusRing onClick={closeToast}>
+        OK
+      </Button>
     </div>
   );
 }
