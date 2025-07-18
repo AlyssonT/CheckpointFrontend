@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuthStore } from "../../../stores/authStore";
+import type { ProfileMenuItem } from "../model/HeaderModels";
 
 export function useHeaderController() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { user } = useAuthStore();
+  const { user, logout } = useAuthStore();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -31,6 +32,24 @@ export function useHeaderController() {
     navigate("/register");
   };
 
+  const profileMenuData: ProfileMenuItem[] = [
+    {
+      label: "My profile",
+      onClick: (closeMenu) => {
+        closeMenu();
+        navigate("/profile");
+      },
+    },
+    {
+      label: "Logout",
+      onClick: (closeMenu) => {
+        closeMenu();
+        logout();
+        navigate("/");
+      },
+    },
+  ];
+
   return {
     handleLogoClick,
     handleLoginClick,
@@ -39,5 +58,6 @@ export function useHeaderController() {
     handleSearch,
     user,
     isLoggedIn: !isNaN(user.id),
+    profileMenuData,
   };
 }

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 interface PopoverProps {
   anchor: ReactNode;
-  children: ReactNode;
+  children: (helpers: { close: () => void }) => ReactNode;
 }
 
 export function Popover({ anchor, children }: PopoverProps) {
@@ -11,6 +11,8 @@ export function Popover({ anchor, children }: PopoverProps) {
 
   const anchorRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
+
+  const close = () => setIsOpen(false);
 
   useEffect(() => {
     if (isOpen && anchorRef.current) {
@@ -52,11 +54,11 @@ export function Popover({ anchor, children }: PopoverProps) {
       </div>
       <div
         ref={popoverRef}
-        className={"absolute"}
+        className="absolute"
         style={{ top: position.top, left: position.left }}
         hidden={!isOpen}
       >
-        {children}
+        {children({ close })}
       </div>
     </>
   );

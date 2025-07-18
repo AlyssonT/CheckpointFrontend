@@ -2,6 +2,7 @@ import { Button } from "../../../components/Button";
 import { CiSearch } from "react-icons/ci";
 import { useHeaderController } from "../controller/HeaderController";
 import { Popover } from "../../../components/Popover";
+import { Paper } from "../../../components/Paper";
 
 export function HeaderView() {
   const {
@@ -12,6 +13,7 @@ export function HeaderView() {
     handleSearch,
     user,
     isLoggedIn,
+    profileMenuData,
   } = useHeaderController();
 
   return (
@@ -44,17 +46,30 @@ export function HeaderView() {
             anchor={
               <div className="flex space-x-2 items-center">
                 <img
-                  src="/logo_typography.svg"
+                  src="/avatar_placeholder.png"
                   alt="avatar"
-                  width={50}
-                  height={50}
-                  className="rounded border-secondary border-2"
+                  width={32}
+                  height={32}
+                  className="rounded-full border-secondary border-2"
                 />
                 <p>{user.name}</p>
               </div>
             }
           >
-            opção
+            {({ close }) => (
+              <Paper className="p-2 bg-primary flex-col">
+                {profileMenuData.map((menuItem) => (
+                  <Button
+                    variant="ghost"
+                    className="w-full"
+                    onClick={() => menuItem.onClick(close)}
+                    noFocusRing
+                  >
+                    {menuItem.label}
+                  </Button>
+                ))}
+              </Paper>
+            )}
           </Popover>
         ) : (
           <div className="flex space-x-2">
