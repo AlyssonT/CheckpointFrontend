@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { createElement, lazy } from "react";
 import type { RouteObject } from "react-router";
 import { registerUserAction } from "./controller/RegisterActions";
 
@@ -9,7 +9,7 @@ const Register = lazy(() =>
 export const registerRoutes: RouteObject[] = [
   {
     path: "/register",
-    element: <Register />,
+    element: createElement(Register),
     action: registerUserAction,
   },
 ];

@@ -3,15 +3,18 @@ import { RootPage } from "../features/RootPage";
 import { loginRoutes } from "../features/Login/routes";
 import { registerRoutes } from "../features/Register/routes";
 import { NotFoundPage } from "../components/NotFound";
+import { profileRoutes } from "../features/Profile/routes";
+import { createElement } from "react";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootPage />,
+    element: createElement(RootPage),
     children: [
       ...loginRoutes,
       ...registerRoutes,
-      { path: "*", element: <NotFoundPage /> },
+      ...profileRoutes,
+      { path: "*", element: createElement(NotFoundPage) },
     ],
   },
 ]);
