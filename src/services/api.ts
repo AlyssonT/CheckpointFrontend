@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useAuthStore } from "../stores/authStore";
+import { router } from "../routes";
 
 export type APIResponse<T = unknown> = {
   data: T;
@@ -28,3 +29,16 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      useAuthStore.getState().logout();
+      router.navigate("/login");
+    }
+    return Promise.reject(error);
+  },
+);

@@ -1,8 +1,12 @@
 import { redirect } from "react-router";
-import { isAuthenticated } from "../../utils/auth";
+import { useAuthStore } from "../../stores/authStore";
 
 export function requireAuth() {
-  if (!isAuthenticated()) {
+  const { user, logout } = useAuthStore.getState();
+  const isYetValid = user.exp * 1000 > Date.now();
+
+  if (!isYetValid) {
+    logout();
     throw redirect("/login");
   }
 }
