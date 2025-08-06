@@ -44,7 +44,7 @@ export function HeaderView() {
         {isLoggedIn ? (
           <Popover
             anchor={
-              <div className="flex space-x-2 items-center">
+              <div className="flex space-x-2 items-center min-w-24">
                 <img
                   src="/avatar_placeholder.png"
                   alt="avatar"
@@ -60,6 +60,7 @@ export function HeaderView() {
               <Paper className="p-2 bg-primary flex-col">
                 {profileMenuData.map((menuItem) => (
                   <Button
+                    key={menuItem.label}
                     variant="ghost"
                     className="w-full"
                     onClick={() => menuItem.onClick(close)}

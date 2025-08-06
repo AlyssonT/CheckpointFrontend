@@ -12,7 +12,7 @@ export const profileRoutes: RouteObject[] = [
     element: createElement(Profile),
     action: async () => {},
     loader: async () => {
-      getUserProfile();
+      return { profile: (await getUserProfile())?.data };
     },
   },
 ];

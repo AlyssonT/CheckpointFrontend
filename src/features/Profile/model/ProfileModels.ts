@@ -3,3 +3,7 @@ export type IGetProfile = {
   avatarUrl: string;
   userID: number;
 };
+
+export type ProfileLoaderData = {
+  profile: IGetProfile;
+};
