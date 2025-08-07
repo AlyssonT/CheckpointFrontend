@@ -11,7 +11,6 @@ import type { ActionData } from "../../../types/actions";
 import { useContext, useEffect } from "react";
 import { ToastContext } from "../../../contexts/Toast/ToastContext";
 import { useAuthStore, type UserData } from "../../../stores/authStore";
-import { jwtDecode } from "jwt-decode";
 
 export function useLoginController() {
   const { register, handleSubmit, formState } = useForm<LoginForm>({
@@ -34,18 +33,17 @@ export function useLoginController() {
     });
   };
 
-  const actionData = useActionData() as ActionData<string>;
+  const actionData = useActionData() as ActionData<UserData>;
   useEffect(() => {
     if (!actionData) return;
     if (actionData.success) {
       openToast(actionData.message ?? "");
-      const payload = jwtDecode<Omit<UserData, "token">>(actionData.data);
+      const userData = actionData.data;
       login({
-        name: payload.name,
-        email: payload.email,
-        id: payload.id,
-        exp: payload.exp,
-        token: actionData.data,
+        name: userData.name,
+        email: userData.email,
+        id: userData.id,
+        exp: userData.exp,
       });
       navigate("/");
     } else {

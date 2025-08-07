@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useAuthStore } from "../stores/authStore";
 import { router } from "../routes";
+import { useAuthStore } from "../stores/authStore";
 
 export type APIResponse<T = unknown> = {
   data: T;
@@ -8,7 +8,7 @@ export type APIResponse<T = unknown> = {
   message: string;
 };
 
-export function throwErrorWithAPIMessage(err: unknown) {
+export function throwErrorWithAPIMessage(err: unknown): never {
   if (axios.isAxiosError<APIResponse>(err) && err.response) {
     throw Error(err.response.data.message);
   }
@@ -17,17 +17,10 @@ export function throwErrorWithAPIMessage(err: unknown) {
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
-});
-
-api.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().user.token;
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
 });
 
 api.interceptors.response.use(

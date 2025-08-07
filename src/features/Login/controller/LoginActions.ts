@@ -1,6 +1,7 @@
 import * as z from "zod/v4";
 import { loginSchema } from "../model/loginModels";
 import { LoginUser } from "../service/loginServices";
+import { getMe } from "../../RootPage/service/rootServices";
 
 export async function loginAction({ request }: { request: Request }) {
   try {
@@ -15,13 +16,13 @@ export async function loginAction({ request }: { request: Request }) {
       };
     }
 
-    const responseData = await LoginUser(result.data);
-    const token = responseData?.data;
+    await LoginUser(result.data);
+    const userData = await getMe();
 
     return {
       success: true,
-      message: responseData?.message ?? "Login successful. Welcome.",
-      data: token,
+      message: "Login successful.",
+      data: userData,
     };
   } catch (error) {
     if (error instanceof Error) {

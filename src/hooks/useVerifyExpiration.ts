@@ -1,10 +1,10 @@
 import { useAuthStore } from "../stores/authStore";
 import { useEffect } from "react";
 
-export function useVerifyToken() {
+export function useVerifyExpiration() {
   const { user, logout } = useAuthStore();
 
-  const verifyToken = () => {
+  const verifyExpiration = () => {
     try {
       const isYetValid = user.exp * 1000 > Date.now();
 
@@ -17,6 +17,6 @@ export function useVerifyToken() {
   };
 
   useEffect(() => {
-    verifyToken();
-  }, [user.token]);
+    verifyExpiration();
+  }, [user.exp]);
 }

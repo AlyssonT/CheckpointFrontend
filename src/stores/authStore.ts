@@ -6,10 +6,9 @@ export interface UserData {
   email: string;
   id: number;
   exp: number;
-  token: string;
 }
 
-const defaultUser = { name: "", email: "", id: NaN, token: "", exp: NaN };
+const defaultUser = { name: "", email: "", id: NaN, exp: NaN };
 
 interface AuthState {
   user: UserData;
@@ -21,10 +20,7 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: defaultUser,
-      login: (user) =>
-        set({
-          user,
-        }),
+      login: (user) => set({ user }),
       logout: () => set({ user: defaultUser }),
     }),
     { name: "auth-storage" },

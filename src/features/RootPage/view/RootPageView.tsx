@@ -2,10 +2,10 @@ import { Outlet } from "react-router";
 import { HeaderView } from "./HeaderView";
 import { Toast } from "../../../components/Toast";
 import { ToastContextProvider } from "../../../contexts/Toast/ToastProvider";
-import { useVerifyToken } from "../../../hooks/useVerifyToken";
+import { useVerifyExpiration } from "../../../hooks/useVerifyExpiration";
 
 export function RootPageView() {
-  useVerifyToken();
+  useVerifyExpiration();
 
   return (
     <div className="bg-primary min-h-screen">
