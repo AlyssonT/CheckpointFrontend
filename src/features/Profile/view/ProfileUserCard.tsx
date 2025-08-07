@@ -5,7 +5,7 @@ import { useProfileController } from "../controller/ProfileController";
 
 export function ProfileUserCard() {
   const { profile, userName } = useProfileController();
-  console.log(profile);
+
   return (
     <div className="relative flex h-[400px] w-full">
       <div className="absolute bg-black h-[352px] w-(--standard-page) z-0 mt-16 rounded-4xl" />
