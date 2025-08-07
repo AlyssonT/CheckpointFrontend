@@ -1,14 +1,15 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { postLogout } from "../features/RootPage/service/rootServices";
 
 export interface UserData {
   name: string;
   email: string;
-  id: number;
-  exp: number;
+  id: number | null;
+  exp: number | null;
 }
 
-const defaultUser = { name: "", email: "", id: NaN, exp: NaN };
+const defaultUser = { name: "", email: "", id: null, exp: null };
 
 interface AuthState {
   user: UserData;
@@ -21,7 +22,10 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: defaultUser,
       login: (user) => set({ user }),
-      logout: () => set({ user: defaultUser }),
+      logout: () => {
+        set({ user: defaultUser });
+        postLogout();
+      },
     }),
     { name: "auth-storage" },
   ),

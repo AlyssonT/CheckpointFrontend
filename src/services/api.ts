@@ -29,7 +29,10 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      useAuthStore.getState().logout();
+      const userStore = useAuthStore.getState();
+      if (userStore.user.id !== null) {
+        userStore.logout();
+      }
       router.navigate("/login");
     }
     return Promise.reject(error);

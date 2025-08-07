@@ -5,6 +5,7 @@ export function useVerifyExpiration() {
   const { user, logout } = useAuthStore();
 
   const verifyExpiration = () => {
+    if (user.id === null || user.exp === null) return;
     try {
       const isYetValid = user.exp * 1000 > Date.now();
 

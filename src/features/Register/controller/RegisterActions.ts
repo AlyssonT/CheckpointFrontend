@@ -1,3 +1,4 @@
+import { getMe } from "../../RootPage/service/rootServices";
 import { registerSchema } from "../models/registerModels";
 import { RegisterUser } from "../service/registerServices";
 import * as z from "zod/v4";
@@ -15,13 +16,13 @@ export async function registerUserAction({ request }: { request: Request }) {
       };
     }
 
-    const responseData = await RegisterUser(result.data);
-    const token = responseData?.data;
+    await RegisterUser(result.data);
+    const userData = await getMe();
 
     return {
       success: true,
-      message: responseData?.message ?? "Registration successful.",
-      data: token,
+      message: "Registration successful.",
+      data: userData,
     };
   } catch (error) {
     if (error instanceof Error) {

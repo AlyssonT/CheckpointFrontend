@@ -13,3 +13,11 @@ export async function getMe() {
     throwErrorWithAPIMessage(error);
   }
 }
+
+export async function postLogout() {
+  try {
+    await api.post("/logout");
+  } catch (error) {
+    throwErrorWithAPIMessage(error);
+  }
+}

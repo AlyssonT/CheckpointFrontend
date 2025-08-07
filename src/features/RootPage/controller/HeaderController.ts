@@ -57,7 +57,7 @@ export function useHeaderController() {
     handleSearchChange,
     handleSearch,
     user,
-    isLoggedIn: !isNaN(user.id),
+    isLoggedIn: user.id !== null,
     profileMenuData,
   };
 }
