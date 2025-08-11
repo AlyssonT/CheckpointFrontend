@@ -13,3 +13,18 @@ export async function getUserProfile() {
     throwErrorWithAPIMessage(e);
   }
 }
+
+export async function putUserProfile(bio: string) {
+  const formData = new FormData();
+  formData.append("bio", bio);
+
+  try {
+    await api.put("/user/profile", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  } catch (error) {
+    throwErrorWithAPIMessage(error);
+  }
+}
