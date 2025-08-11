@@ -3,6 +3,8 @@ import { HeaderView } from "./HeaderView";
 import { Toast } from "../../../components/Toast";
 import { ToastContextProvider } from "../../../contexts/Toast/ToastProvider";
 import { useVerifyExpiration } from "../../../hooks/useVerifyExpiration";
+import { Suspense } from "react";
+import { CircularFallback } from "../../../components/CircularFallback";
 
 export function RootPageView() {
   useVerifyExpiration();
@@ -13,7 +15,9 @@ export function RootPageView() {
         <HeaderView />
         <Toast />
         <div className="pt-16">
-          <Outlet />
+          <Suspense fallback={<CircularFallback />}>
+            <Outlet />
+          </Suspense>
         </div>
       </ToastContextProvider>
     </div>

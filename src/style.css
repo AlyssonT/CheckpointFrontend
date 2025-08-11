@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "futura-heavy-bt";
-  src: url("/src/assets/fonts/futura-heavy-bt.ttf") format("truetype");
+  font-family: "futura-medium-bt";
+  src: url("/src/assets/fonts/FuturaStd-Medium.otf") format("truetype");
 }
 
 @import "tailwindcss";
@@ -15,12 +15,12 @@
   --color-error: #451d1d;
   --color-inputbg: #313131;
   --text-primary: #ffffff;
-  --font-futura: "futura-heavy-bt", sans-serif;
+  --font-futura-medium: "futura-medium-bt", sans-serif;
   --screen-minus-header: calc(100vh - 4rem);
   --standard-page: 900px;
 }
 
 body {
   color: var(--text-primary);
-  font-family: var(--font-futura);
+  font-family: var(--font-futura-medium);
 }
