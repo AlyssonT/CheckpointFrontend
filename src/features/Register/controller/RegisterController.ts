@@ -1,16 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {
-  useSubmit,
-  useActionData,
-  useNavigation,
-  useNavigate,
-} from "react-router";
-import { ToastContext } from "../../../contexts/Toast/ToastContext";
-import type { ActionData } from "../../../types/actions";
+import { useNavigate } from "react-router";
 import { type RegisterForm, registerSchema } from "../models/registerModels";
 import { useAuthStore, type UserData } from "../../../stores/authStore";
+import { useActionController } from "../../../hooks/useActionController";
 
 export function useRegisterController() {
   const { register, handleSubmit, formState } = useForm<RegisterForm>({
@@ -19,26 +12,14 @@ export function useRegisterController() {
   });
   const login = useAuthStore((state) => state.login);
 
-  const navigation = useNavigation();
   const navigate = useNavigate();
-  const isSubmitting = navigation.state !== "idle";
-
-  const { openToast } = useContext(ToastContext);
-
-  const submit = useSubmit();
-  const onSubmit = (data: RegisterForm) => {
-    submit(data, {
-      method: "post",
-      action: "/register",
-    });
-  };
-
-  const actionData = useActionData() as ActionData<UserData>;
-  useEffect(() => {
-    if (!actionData) return;
-    if (actionData.success) {
-      openToast(actionData.message ?? "");
-      const userData = actionData.data;
+  const { isSubmitting, onSubmit } = useActionController<
+    RegisterForm,
+    UserData
+  >({
+    method: "post",
+    action: "/register",
+    onSuccess: (userData: UserData) => {
       login({
         name: userData.name,
         email: userData.email,
@@ -46,10 +27,8 @@ export function useRegisterController() {
         exp: userData.exp,
       });
       navigate("/");
-    } else {
-      openToast(actionData.error ?? "", "error");
-    }
-  }, [actionData, openToast]);
+    },
+  });
 
   return {
     register,
