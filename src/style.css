@@ -23,4 +23,5 @@
 body {
   color: var(--text-primary);
   font-family: var(--font-futura-medium);
+  letter-spacing: 0.06em;
 }
