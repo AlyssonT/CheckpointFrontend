@@ -6,6 +6,7 @@ import { Paper } from "../../../components/Paper";
 
 export function HeaderView() {
   const {
+    searchQuery,
     handleLogoClick,
     handleLoginClick,
     handleRegisterClick,
@@ -30,7 +31,9 @@ export function HeaderView() {
       </div>
       <div className="flex items-center justify-center">
         <input
+          value={searchQuery}
           className="rounded-4xl bg-tertiary focus:outline-0 px-4 py-1 text-black min-w-96"
+          spellCheck={false}
           onKeyDown={handleSearch}
           onChange={handleSearchChange}
         />

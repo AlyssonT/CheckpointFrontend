@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router";
 import { useAuthStore } from "../../../stores/authStore";
 import type { ProfileMenuItem } from "../model/HeaderModels";
 
 export function useHeaderController() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
 
   const { user, logout } = useAuthStore();
@@ -50,7 +51,13 @@ export function useHeaderController() {
     },
   ];
 
+  useEffect(() => {
+    const query = searchParams.get("query");
+    if (query) setSearchQuery(query);
+  }, [searchParams]);
+
   return {
+    searchQuery,
     handleLogoClick,
     handleLoginClick,
     handleRegisterClick,
