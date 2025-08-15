@@ -34,9 +34,9 @@ export function PaginatedDataGrid<T>({
     updateSearchParams(newPage, pageSize);
   };
 
-  const handlePageSizeChange = (newValue: number) => {
-    updateSearchParams(page, newValue);
-  };
+  // const handlePageSizeChange = (newValue: number) => {
+  //   updateSearchParams(page, newValue);
+  // };
 
   const updateSearchParams = (page: number, pageSize: number) => {
     setSearchParams((prev) => {

@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router";
+import { GameImage } from "../../../components/GameImage";
 import { Paper } from "../../../components/Paper";
 import { Tooltip } from "../../../components/Tooltip";
 import type { Game } from "../models/gameModels";
@@ -7,15 +9,13 @@ type GameCardProps = {
 };
 
 export function GameCard({ game }: GameCardProps) {
+  const navigate = useNavigate();
   return (
-    <Paper className="flex w-full h-30 gap-4 cursor-pointer">
-      <img
-        src={game.imagem.length > 0 ? game.imagem : undefined}
-        width={256}
-        height={120}
-        loading="lazy"
-        style={{ objectFit: "contain" }}
-      />
+    <Paper
+      onClick={() => navigate(`/games/${game.game_id}`)}
+      className="flex w-full h-30 gap-4 cursor-pointer"
+    >
+      <GameImage image={game.imagem} />
       <div>
         <h3 className="text-2xl font-semibold">{game.name}</h3>
         <p className="text-sm mt-2 line-clamp-3 max-w-xl">{game.description}</p>

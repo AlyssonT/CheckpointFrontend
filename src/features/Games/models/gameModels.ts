@@ -8,7 +8,16 @@ export type Game = {
   metacritic: number;
 };
 
+export type Genre = {
+  id: number;
+  description: string;
+};
+
 export type GetGamesResponse = {
   games: Game[];
   totalItems: number;
+};
+
+export type GetGameByIdResponse = Game & {
+  genres: Genre[];
 };

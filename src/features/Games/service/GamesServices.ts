@@ -4,7 +4,10 @@ import {
   type APIResponse,
 } from "../../../services/api";
 import type { PaginationOptions } from "../../../types/pagination";
-import type { GetGamesResponse } from "../models/gameModels";
+import type {
+  GetGameByIdResponse,
+  GetGamesResponse,
+} from "../models/gameModels";
 
 export async function GetListGames(
   query?: string | null,
@@ -14,6 +17,17 @@ export async function GetListGames(
     const response = await api.get<APIResponse<GetGamesResponse>>("/games", {
       params: { query, page: pagination?.page, pageSize: pagination?.pageSize },
     });
+    return response.data.data;
+  } catch (error) {
+    throwErrorWithAPIMessage(error);
+  }
+}
+
+export async function GetGameById(gameId: number) {
+  try {
+    const response = await api.get<APIResponse<GetGameByIdResponse>>(
+      `/games/${gameId}`,
+    );
     return response.data.data;
   } catch (error) {
     throwErrorWithAPIMessage(error);
