@@ -18,7 +18,7 @@ export function Tooltip({ children, title }: TooltipProps) {
 
   const getTooltipClass = () => {
     const baseClass =
-      "absolute z-99 bg-gray-900 left-1/2 -top-10 transform -translate-x-1/2 rounded-xl px-3";
+      "absolute z-99 bg-gray-900 left-1/2 -top-10 transform -translate-x-1/2 rounded-xl px-3 text-nowrap";
     const opacity = isVisible ? "opacity-100" : "opacity-0";
     const pointerEvents = isVisible
       ? "pointer-events-auto"

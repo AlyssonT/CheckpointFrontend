@@ -13,7 +13,13 @@ export const gamesRoutes: RouteObject[] = [
     loader: async ({ request }) => {
       const url = new URL(request.url);
       const query = url.searchParams.get("query");
-      return await GetListGames(query);
+      const page = url.searchParams.get("page") || "1";
+      const pageSize = url.searchParams.get("pageSize") || "10";
+
+      return await GetListGames(query, {
+        page: parseInt(page),
+        pageSize: parseInt(pageSize),
+      });
     },
   },
 ];

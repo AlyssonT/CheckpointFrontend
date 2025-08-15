@@ -10,5 +10,5 @@ export type Game = {
 
 export type GetGamesResponse = {
   games: Game[];
-  totalRecords: number;
+  totalItems: number;
 };

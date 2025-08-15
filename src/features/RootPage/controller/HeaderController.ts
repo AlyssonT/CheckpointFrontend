@@ -16,9 +16,7 @@ export function useHeaderController() {
 
   const handleSearch = (e?: React.KeyboardEvent<HTMLInputElement>) => {
     if (e && e.key !== "Enter") return;
-    if (searchQuery.trim() !== "") {
-      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-    }
+    navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
   };
 
   const handleLogoClick = () => {
