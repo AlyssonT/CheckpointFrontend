@@ -50,7 +50,7 @@ export function PaginatedDataGrid<T>({
   return (
     <Paper className="p-2">
       <h2>{title}</h2>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         {items.map((item) => (
           <div key={getItemId(item)}>{renderRow(item)}</div>
         ))}
@@ -59,10 +59,20 @@ export function PaginatedDataGrid<T>({
         <p>
           Página {page} de {Math.ceil(totalItems / pageSize)}
         </p>
-        <Button variant="outlined" noFocusRing onClick={handlePrevPage}>
+        <Button
+          variant="contained"
+          className="rounded-lg hover:bg-hover-secondary"
+          noFocusRing
+          onClick={handlePrevPage}
+        >
           {"<"}
         </Button>
-        <Button variant="outlined" noFocusRing onClick={handleNextPage}>
+        <Button
+          variant="contained"
+          className="rounded-lg hover:bg-hover-secondary"
+          noFocusRing
+          onClick={handleNextPage}
+        >
           {">"}
         </Button>
       </div>

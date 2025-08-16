@@ -3,13 +3,24 @@
   src: url("/src/assets/fonts/FuturaStd-Medium.otf") format("truetype");
 }
 
+@font-face {
+  font-family: "satoshi-regular";
+  src: url("/src/assets/fonts/Satoshi-Regular.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "harmonia-bold";
+  src: url("/src/assets/fonts/Harmonia-Sans-W01-Regular.otf") format("truetype");
+}
+
 @import "tailwindcss";
 
 @theme {
   --color-primary: #212121;
   --color-secondary: #e96900;
+  --color-hover-secondary: #e98c00;
   --color-tertiary: #d9d9d9;
-  --color-paper: #3a3a3a;
+  --color-paper: #2a2a2a;
   --color-focus: #ffb74d;
   --color-success: #25451d;
   --color-warning: #44451d;
@@ -17,12 +28,30 @@
   --color-inputbg: #313131;
   --text-primary: #ffffff;
   --font-futura-medium: "futura-medium-bt", sans-serif;
+  --font-satoshi-regular: "satoshi-regular", sans-serif;
+  --font-hormania-bold: "harmonia-regular", sans-serif;
   --screen-minus-header: calc(100vh - 4rem);
   --standard-page: 900px;
 }
 
 body {
   color: var(--text-primary);
-  font-family: var(--font-futura-medium);
-  letter-spacing: 0.06em;
+  font-family: var(--font-hormania-regular);
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+p {
+  line-height: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
+  font-family: var(--font-satoshi-regular), Arial, Helvetica, sans-serif;
+  font-weight: bolder;
 }

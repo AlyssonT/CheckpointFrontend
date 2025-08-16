@@ -6,6 +6,7 @@ export type Game = {
   description: string;
   imagem: string;
   metacritic: number;
+  genres: Genre[];
 };
 
 export type Genre = {
