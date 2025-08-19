@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Paper } from "./Paper";
 import { Button } from "./Button";
 import { useSearchParams } from "react-router";
+import { PiGreaterThan, PiLessThan } from "react-icons/pi";
 
 interface PaginatedDataGridProps<T> {
   items: T[];
@@ -18,6 +19,8 @@ export function PaginatedDataGrid<T>({
   title,
   totalItems,
 }: PaginatedDataGridProps<T>) {
+  if (items.length === 0) return null;
+
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1");
   const pageSize = parseInt(searchParams.get("pageSize") || "10");
@@ -57,23 +60,23 @@ export function PaginatedDataGrid<T>({
       </div>
       <div className="flex items-center p-2 gap-4">
         <p>
-          Página {page} de {Math.ceil(totalItems / pageSize)}
+          Page {page} of {Math.ceil(totalItems / pageSize)}
         </p>
         <Button
           variant="contained"
-          className="rounded-lg hover:bg-hover-secondary"
+          className="rounded-lg hover:bg-hover-secondary flex justify-center items-center"
           noFocusRing
           onClick={handlePrevPage}
         >
-          {"<"}
+          <PiLessThan />
         </Button>
         <Button
           variant="contained"
-          className="rounded-lg hover:bg-hover-secondary"
+          className="rounded-lg hover:bg-hover-secondary flex justify-center items-center"
           noFocusRing
           onClick={handleNextPage}
         >
-          {">"}
+          <PiGreaterThan />
         </Button>
       </div>
     </Paper>

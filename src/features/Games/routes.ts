@@ -1,6 +1,7 @@
 import { createElement, lazy } from "react";
 import type { RouteObject } from "react-router";
-import { GetGameById, GetListGames } from "./service/GamesServices";
+import { GetListGames } from "./service/GamesServices";
+import { gamePageLoader } from "./controller/GamePageLoader";
 
 const ListGames = lazy(() =>
   import("./index").then((m) => ({ default: m.ListGames })),
@@ -29,11 +30,6 @@ export const gamesRoutes: RouteObject[] = [
   {
     path: "/games/:gameId",
     element: createElement(GamePage),
-    loader: async ({ params }) => {
-      const gameId = parseInt(params.gameId ?? "");
-      if (!isNaN(gameId)) {
-        return await GetGameById(gameId);
-      }
-    },
+    loader: gamePageLoader,
   },
 ];
