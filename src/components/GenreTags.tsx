@@ -10,7 +10,10 @@ export function GenreTags({ genres, className = "" }: GenreTagsProps) {
     <div className={`flex flex-row gap-2 flex-wrap ${className}`}>
       {genres &&
         genres.map((genre) => (
-          <span className="bg-primary text-sm px-2 py-1 rounded-md">
+          <span
+            key={genre.id}
+            className="bg-primary text-sm px-2 py-1 rounded-md"
+          >
             {genre.description}
           </span>
         ))}
