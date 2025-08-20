@@ -1,4 +1,3 @@
-import { CgAdd, CgController } from "react-icons/cg";
 import { PaginatedDataGrid } from "../../../components/PaginatedDataGrid";
 import { Paper } from "../../../components/Paper";
 import { formatter } from "../../../utils/formatter";
@@ -10,9 +9,18 @@ import { RiArchiveStackFill } from "react-icons/ri";
 import { SiVerizon } from "react-icons/si";
 import { FaThumbsDown } from "react-icons/fa";
 import { Button } from "../../../components/Button";
+import { GrAdd } from "react-icons/gr";
+import { ReviewFormView } from "./ReviewFormView";
 
 export function GamePageView() {
-  const { gameData, reviewsData } = useGamePageController();
+  const {
+    gameData,
+    reviewsData,
+    handleClickAdd,
+    shouldShowForm,
+    userReviewData,
+    handleHideForm,
+  } = useGamePageController();
 
   return (
     <div className="w-full h-auto flex justify-center py-8">
@@ -46,7 +54,7 @@ export function GamePageView() {
                     Dropped:
                   </p>
                 </div>
-                <div className="flex flex-col" style={{ gap: "14.5px" }}>
+                <div className="flex flex-col mt-0.5" style={{ gap: "14px" }}>
                   <p>{formatter.format(reviewsData.backlog)}</p>
                   <p>{formatter.format(reviewsData.playing)}</p>
                   <p>{formatter.format(reviewsData.finished)}</p>
@@ -54,14 +62,24 @@ export function GamePageView() {
                 </div>
               </div>
             </Paper>
-            <Button>
-              <CgAdd size={20} />
+            <Button onClick={handleClickAdd}>
+              <GrAdd size={20} />
               <span className="ml-2">Add Review</span>
             </Button>
           </div>
-          <div className="inline-flex text-2xl">
-            <p>{`Reviews (${reviewsData.totalItems}):`}</p>
+        </div>
+
+        {shouldShowForm && (
+          <div className="w-full flex justify-center">
+            <ReviewFormView
+              isEdit={userReviewData !== null}
+              onClickCancel={handleHideForm}
+              userReviewData={userReviewData}
+            />
           </div>
+        )}
+        <div className="inline-flex text-2xl">
+          <p>{`Reviews (${reviewsData.totalItems}):`}</p>
         </div>
 
         <PaginatedDataGrid

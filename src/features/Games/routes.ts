@@ -2,6 +2,7 @@ import { createElement, lazy } from "react";
 import type { RouteObject } from "react-router";
 import { GetListGames } from "./service/GamesServices";
 import { gamePageLoader } from "./controller/GamePageLoader";
+import { reviewPageAction } from "./controller/ReviewPageActions";
 
 const ListGames = lazy(() =>
   import("./index").then((m) => ({ default: m.ListGames })),
@@ -31,5 +32,6 @@ export const gamesRoutes: RouteObject[] = [
     path: "/games/:gameId",
     element: createElement(GamePage),
     loader: gamePageLoader,
+    action: reviewPageAction,
   },
 ];

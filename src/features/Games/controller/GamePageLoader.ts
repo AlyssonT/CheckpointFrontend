@@ -1,5 +1,6 @@
 import type { Params } from "react-router";
 import { GetGameById, GetGameReviews } from "../service/GamesServices";
+import { GetUserGameReviewById } from "../../Profile/service/ProfileServices";
 
 export async function gamePageLoader({
   params,
@@ -21,11 +22,13 @@ export async function gamePageLoader({
         page: parseInt(page),
         pageSize: parseInt(pageSize),
       }),
+      GetUserGameReviewById(gameId),
     ]);
 
     return {
       gameData: resolvedPromises[0],
       reviewsData: resolvedPromises[1],
+      userReviewData: resolvedPromises[2],
     };
   }
 }

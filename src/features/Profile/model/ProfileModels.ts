@@ -8,7 +8,7 @@ export type ProfileLoaderData = {
   profile: IGetProfile;
 };
 
-export type GetUserReviewsResponse = {
+export type UserGameReview = {
   game: {
     game_id: number;
     metacritic: number;
@@ -20,4 +20,6 @@ export type GetUserReviewsResponse = {
   status: number;
   score: number;
   review: string;
-}[];
+};
+
+export type GetUserReviewsResponse = UserGameReview[];

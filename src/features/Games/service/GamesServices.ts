@@ -49,3 +49,45 @@ export async function GetGameReviews(
     throwErrorWithAPIMessage(error);
   }
 }
+
+export async function PostGameReview(
+  gameId: number,
+  review: string,
+  status: number,
+  score: number,
+) {
+  try {
+    await api.post(`user/games/${gameId}`, {
+      review,
+      status,
+      score,
+    });
+  } catch (error) {
+    throwErrorWithAPIMessage(error);
+  }
+}
+
+export async function PutGameReview(
+  gameId: number,
+  review: string,
+  status: number,
+  score: number,
+) {
+  try {
+    await api.put(`user/games/${gameId}`, {
+      review,
+      status,
+      score,
+    });
+  } catch (error) {
+    throwErrorWithAPIMessage(error);
+  }
+}
+
+export async function DeleteGameReview(gameId: number) {
+  try {
+    await api.delete(`user/games/${gameId}`);
+  } catch (error) {
+    throwErrorWithAPIMessage(error);
+  }
+}

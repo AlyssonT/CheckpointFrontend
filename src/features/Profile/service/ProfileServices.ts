@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   api,
   throwErrorWithAPIMessage,
@@ -6,6 +7,7 @@ import {
 import type {
   GetUserReviewsResponse,
   IGetProfile,
+  UserGameReview,
 } from "../model/ProfileModels";
 
 export async function getUserProfile() {
@@ -32,13 +34,27 @@ export async function putUserProfile(bio: string) {
   }
 }
 
-export async function GetReviewsGFromUser() {
+export async function GetReviewsFromUser() {
   try {
     const response = await api.get<APIResponse<GetUserReviewsResponse>>(
       "user/games",
     );
     return response.data.data;
   } catch (error) {
+    throwErrorWithAPIMessage(error);
+  }
+}
+
+export async function GetUserGameReviewById(gameId: number) {
+  try {
+    const response = await api.get<APIResponse<UserGameReview>>(
+      `user/games/${gameId}`,
+    );
+    return response.data.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
     throwErrorWithAPIMessage(error);
   }
 }
