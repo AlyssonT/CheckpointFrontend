@@ -10,7 +10,7 @@ export type UseActionControllerProps<TResponse> = {
 };
 
 export function useActionController<
-  TForm extends Record<string, string>,
+  TForm extends Record<string, any>,
   TResponse,
 >({ method, action, onSuccess }: UseActionControllerProps<TResponse>) {
   const { openToast } = useContext(ToastContext);

@@ -5,7 +5,7 @@ interface PaperProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Paper({ className = "", children, ...props }: PaperProps) {
   return (
-    <div {...props} className={`shadow-md rounded-lg bg-paper ${className}`}>
+    <div {...props} className={`shadow-lg rounded-lg bg-paper ${className}`}>
       {children}
     </div>
   );

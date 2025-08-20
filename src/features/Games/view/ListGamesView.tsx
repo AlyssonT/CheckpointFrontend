@@ -11,7 +11,7 @@ export function ListGamesView() {
         {query && <h1 className="text-2xl mb-2">Results for "{query}":</h1>}
         <PaginatedDataGrid
           items={gamesData.games}
-          getItemId={(game) => game.id}
+          getItemId={(game) => game.game_id}
           totalItems={gamesData.totalItems}
           renderRow={(game) => <GameCard game={game} />}
         />
