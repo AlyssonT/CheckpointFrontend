@@ -24,7 +24,7 @@ export function Toast() {
 
   return (
     <div
-      className={`fixed flex justify-between items-center bottom-8 right-8 ${color} min-w-80 rounded shadow-lg px-4 py-2 ${
+      className={`fixed flex justify-between items-center bottom-8 right-8 ${color} min-w-80 rounded shadow-lg px-4 py-2 z-50 ${
         toastData.open ? "pointer-events-auto" : "pointer-events-none"
       } transition-opacity duration-500 ${
         toastData.open ? "opacity-100" : "opacity-0"
