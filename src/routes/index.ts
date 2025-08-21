@@ -7,6 +7,7 @@ import { profileRoutes } from "../features/Profile/routes";
 import { createElement } from "react";
 import { gamesRoutes } from "../features/Games/routes";
 import { CircularFallback } from "../components/CircularFallback";
+import { UnknownError } from "../components/UnknownError";
 
 export const router = createBrowserRouter([
   {
@@ -20,5 +21,6 @@ export const router = createBrowserRouter([
       ...gamesRoutes,
       { path: "*", element: createElement(NotFoundPage) },
     ],
+    errorElement: createElement(UnknownError),
   },
 ]);
