@@ -73,7 +73,7 @@ export function GamePageView() {
           <div className="w-full flex justify-center">
             <ReviewFormView
               isEdit={userReviewData !== null}
-              onClickCancel={handleHideForm}
+              hideForm={handleHideForm}
               userReviewData={userReviewData}
             />
           </div>

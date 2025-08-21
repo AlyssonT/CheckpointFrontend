@@ -8,6 +8,7 @@ import type {
   GetGameByIdResponse,
   GetGameReviewsResponse,
   GetGamesResponse,
+  PostPutReviewData,
 } from "../models/gameModels";
 
 export async function GetListGames(
@@ -50,34 +51,25 @@ export async function GetGameReviews(
   }
 }
 
-export async function PostGameReview(
-  gameId: number,
-  review: string,
-  status: number,
-  score: number,
-) {
+export async function PostGameReview(data: PostPutReviewData) {
   try {
-    await api.post(`user/games/${gameId}`, {
-      review,
-      status,
-      score,
+    await api.post("user/games", {
+      game_id: data.gameId,
+      review: data.review,
+      status: parseInt(data.status),
+      score: parseInt(data.score),
     });
   } catch (error) {
     throwErrorWithAPIMessage(error);
   }
 }
 
-export async function PutGameReview(
-  gameId: number,
-  review: string,
-  status: number,
-  score: number,
-) {
+export async function PutGameReview(data: PostPutReviewData) {
   try {
-    await api.put(`user/games/${gameId}`, {
-      review,
-      status,
-      score,
+    await api.put(`user/games/${data.gameId}`, {
+      review: data.review,
+      status: parseInt(data.status),
+      score: parseInt(data.score),
     });
   } catch (error) {
     throwErrorWithAPIMessage(error);

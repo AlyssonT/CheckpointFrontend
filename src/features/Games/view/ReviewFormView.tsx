@@ -9,13 +9,13 @@ import type { UserGameReview } from "../../Profile/model/ProfileModels";
 
 interface ReviewFormViewProps {
   isEdit: boolean;
-  onClickCancel?: () => void;
+  hideForm?: () => void;
   userReviewData: UserGameReview | null;
 }
 
 export function ReviewFormView({
   isEdit,
-  onClickCancel,
+  hideForm,
   userReviewData,
 }: ReviewFormViewProps) {
   const {
@@ -26,7 +26,7 @@ export function ReviewFormView({
     onSubmitPut,
     isSubmitting,
     statusOptions,
-  } = useReviewController({ userReviewData });
+  } = useReviewController({ userReviewData, hideForm });
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
@@ -72,7 +72,7 @@ export function ReviewFormView({
             error={formState.errors.review?.message}
           />
           <div className="flex justify-end mt-4 gap-4">
-            <Button onClick={onClickCancel} variant="outlined">
+            <Button onClick={hideForm} variant="outlined">
               Cancel
             </Button>
             <Button type="submit" loading={isSubmitting}>

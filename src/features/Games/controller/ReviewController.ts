@@ -4,17 +4,21 @@ import {
   type ReviewForm,
   type StatusGame,
 } from "../models/gameModels";
-import { useActionController } from "../../../hooks/useActionController";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "react-router";
 import type { UserGameReview } from "../../Profile/model/ProfileModels";
+import { useFetcherController } from "../../../hooks/useFetcherController";
 
 interface ReviewControllerProps {
   userReviewData: UserGameReview | null;
+  hideForm?: () => void;
 }
 
-export function useReviewController({ userReviewData }: ReviewControllerProps) {
+export function useReviewController({
+  userReviewData,
+  hideForm,
+}: ReviewControllerProps) {
   const params = useParams();
   const gameId = parseInt(params.gameId ?? "");
   const { register, handleSubmit, formState } = useForm<ReviewForm>({
@@ -30,15 +34,17 @@ export function useReviewController({ userReviewData }: ReviewControllerProps) {
   });
 
   const { onSubmit: onSubmitPost, isSubmitting: isSubmittingPost } =
-    useActionController<ReviewForm, null>({
+    useFetcherController<ReviewForm, null>({
       method: "post",
       action: `/games/${gameId}`,
+      onSuccess: hideForm,
     });
 
   const { onSubmit: onSubmitPut, isSubmitting: isSubmittingPut } =
-    useActionController<ReviewForm, null>({
+    useFetcherController<ReviewForm, null>({
       method: "put",
       action: `/games/${gameId}`,
+      onSuccess: hideForm,
     });
 
   return {

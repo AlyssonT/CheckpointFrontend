@@ -34,7 +34,7 @@ export function useActionController<
       const data = actionData.data as TResponse;
       onSuccess?.(data);
     } else {
-      openToast(actionData.error ?? "", "error");
+      openToast(actionData.error ?? "Unknown error.", "error");
     }
   }, [actionData, openToast]);
 

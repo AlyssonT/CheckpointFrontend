@@ -85,3 +85,7 @@ export const reviewSchema = z.object({
 export type ReviewForm = z.infer<typeof reviewSchema>;
 
 export type StatusGame = "0" | "1" | "2" | "3";
+
+export type PostPutReviewData = {
+  gameId: number;
+} & ReviewForm;
