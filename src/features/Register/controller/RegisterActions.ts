@@ -1,7 +1,7 @@
 import { getMe } from "../../RootPage/service/rootServices";
 import { registerSchema } from "../models/registerModels";
 import { RegisterUser } from "../service/registerServices";
-import * as z from "zod/v4";
+import { z } from "zod/v4";
 
 export async function registerUserAction({ request }: { request: Request }) {
   try {

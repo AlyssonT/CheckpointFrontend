@@ -1,6 +1,6 @@
 import type { Params } from "react-router";
 import { reviewSchema } from "../models/gameModels";
-import z from "zod/v4";
+import { z } from "zod/v4";
 import { PostGameReview, PutGameReview } from "../service/GamesServices";
 
 export async function reviewPageAction({
