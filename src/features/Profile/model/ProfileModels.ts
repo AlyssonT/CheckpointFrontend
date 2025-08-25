@@ -6,6 +6,7 @@ export type IGetProfile = {
 
 export type ProfileLoaderData = {
   profile: IGetProfile;
+  reviewsData: GetUserReviewsResponse;
 };
 
 export type UserGameReview = {
@@ -22,4 +23,7 @@ export type UserGameReview = {
   review: string;
 };
 
-export type GetUserReviewsResponse = UserGameReview[];
+export type GetUserReviewsResponse = {
+  games: UserGameReview[];
+  totalItems: number;
+};

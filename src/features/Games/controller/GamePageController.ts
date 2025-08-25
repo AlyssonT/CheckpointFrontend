@@ -1,19 +1,19 @@
-import { useLoaderData } from "react-router";
+import { useLoaderData, useSearchParams } from "react-router";
 import type { GamePageLoaderData } from "../models/gameModels";
-import { useState } from "react";
+import { useShowHideReviewForm } from "../../../hooks/useShowHideReviewForm";
 
 export function useGamePageController() {
+  const [searchParams] = useSearchParams();
   const { gameData, reviewsData, userReviewData } =
     useLoaderData<GamePageLoaderData>();
-  const [shouldShowForm, setShouldShowForm] = useState(false);
 
-  const handleClickAdd = () => {
-    setShouldShowForm(true);
-  };
+  let startEditReview = false;
+  if (searchParams.get("editReview") === "true" && userReviewData) {
+    startEditReview = true;
+  }
 
-  const handleHideForm = () => {
-    setShouldShowForm(false);
-  };
+  const { handleClickAdd, handleHideForm, shouldShowForm } =
+    useShowHideReviewForm({ defaultState: startEditReview });
 
   return {
     gameData,

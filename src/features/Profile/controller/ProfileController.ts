@@ -4,7 +4,7 @@ import { useAuthStore } from "../../../stores/authStore";
 import { useActionController } from "../../../hooks/useActionController";
 
 export function useProfileController() {
-  const { profile } = useLoaderData<ProfileLoaderData>();
+  const { profile, reviewsData } = useLoaderData<ProfileLoaderData>();
   const { user } = useAuthStore();
 
   const { isSubmitting, onSubmit } = useActionController<{ bio: string }, null>(
@@ -13,6 +13,7 @@ export function useProfileController() {
 
   return {
     profile,
+    reviewsData,
     userName: user.name,
     isSubmitting,
     onSubmit,

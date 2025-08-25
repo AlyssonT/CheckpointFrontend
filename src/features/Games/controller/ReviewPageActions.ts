@@ -1,7 +1,11 @@
 import type { Params } from "react-router";
 import { reviewSchema } from "../models/gameModels";
 import { z } from "zod/v4";
-import { PostGameReview, PutGameReview } from "../service/GamesServices";
+import {
+  DeleteGameReview,
+  PostGameReview,
+  PutGameReview,
+} from "../service/GamesServices";
 
 export async function reviewPageAction({
   request,
@@ -12,6 +16,15 @@ export async function reviewPageAction({
 }) {
   try {
     const gameId = parseInt(params.gameId ?? "");
+
+    if (request.method === "DELETE") {
+      await DeleteGameReview(gameId);
+
+      return {
+        success: true,
+        message: "Review deleted successfully.",
+      };
+    }
 
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
@@ -31,7 +44,7 @@ export async function reviewPageAction({
         success: true,
         message: "Review submitted successfully.",
       };
-    } else {
+    } else if (request.method === "PUT") {
       await PutGameReview({ ...result.data, gameId });
 
       return {

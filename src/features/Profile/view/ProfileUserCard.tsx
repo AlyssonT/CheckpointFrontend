@@ -12,6 +12,7 @@ type ProfileUserCardProps = {
   userName: string;
   onSubmit: (data: { bio: string }) => void;
   isSubmitting: boolean;
+  totalReviews: number;
 };
 
 export function ProfileUserCard({
@@ -19,6 +20,7 @@ export function ProfileUserCard({
   userName,
   isSubmitting,
   onSubmit,
+  totalReviews,
 }: ProfileUserCardProps) {
   const [bio, setBio] = useState(profile.bio || "");
   const [isEditing, setIsEditing] = useState(false);
@@ -36,15 +38,12 @@ export function ProfileUserCard({
           height={160}
           className="rounded-full border-secondary border-2 bg-primary"
         />
-        <div className="flex flex-col items-center mb-8 space-y-8">
-          <div className="flex space-x-2 items-center">
+        <div className="flex items-center mb-12 justify-center gap-4">
+          <div className="flex flex-col items-center justify-center">
             <BiJoystick size={24} className="text-(--color-secondary)" />
-            <p>{47} games</p>
-          </div>
-          <div className="flex space-x-2 items-center">
             <TbStarsFilled size={24} className="text-(--color-secondary)" />
-            <p>{5} reviews</p>
           </div>
+          <p>{totalReviews} reviews</p>
         </div>
       </div>
       <div className="flex flex-col w-full justify-between z-10 mr-4">

@@ -47,13 +47,21 @@ export function useReviewController({
       onSuccess: hideForm,
     });
 
+  const { onSubmit: onDeleteReview, isSubmitting: isDeletingReview } =
+    useFetcherController({
+      method: "delete",
+      action: `/games/${gameId}`,
+      onSuccess: hideForm,
+    });
+
   return {
     register,
     handleSubmit,
     formState,
     onSubmitPost,
     onSubmitPut,
-    isSubmitting: isSubmittingPost || isSubmittingPut,
+    onDeleteReview,
+    isSubmitting: isSubmittingPost || isSubmittingPut || isDeletingReview,
     statusOptions,
   };
 }

@@ -24,6 +24,7 @@ export function ReviewFormView({
     formState,
     onSubmitPost,
     onSubmitPut,
+    onDeleteReview,
     isSubmitting,
     statusOptions,
   } = useReviewController({ userReviewData, hideForm });
@@ -72,6 +73,11 @@ export function ReviewFormView({
             error={formState.errors.review?.message}
           />
           <div className="flex justify-end mt-4 gap-4">
+            {isEdit && (
+              <Button onClick={onDeleteReview} variant="danger">
+                Delete
+              </Button>
+            )}
             <Button onClick={hideForm} variant="outlined">
               Cancel
             </Button>
