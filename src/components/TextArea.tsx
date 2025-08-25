@@ -32,6 +32,7 @@ export function TextArea<T extends FieldValues>({
       <textarea
         style={{ resize: "none" }}
         id={name}
+        spellCheck="false"
         className={`${baseStyles} ${className} ${
           error ? "border-red-500" : ""
         }`}

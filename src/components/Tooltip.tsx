@@ -3,9 +3,10 @@ import { useState, type ReactNode } from "react";
 interface TooltipProps {
   title: string;
   children: ReactNode;
+  className?: string;
 }
 
-export function Tooltip({ children, title }: TooltipProps) {
+export function Tooltip({ children, title, className }: TooltipProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleMouseEnter = () => {
@@ -29,7 +30,7 @@ export function Tooltip({ children, title }: TooltipProps) {
 
   return (
     <span
-      className="relative"
+      className={`relative ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

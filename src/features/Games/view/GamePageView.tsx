@@ -28,12 +28,6 @@ export function GamePageView() {
         <GameCard game={gameData} disableCardClick />
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-evenly gap-12">
-            <div className="flex flex-col items-center gap-4">
-              <p className="text-xl">Average user rating</p>
-              <div className="bg-green-700 rounded-lg h-10 w-10 flex justify-center items-center text-xl">
-                {reviewsData.averageRating}
-              </div>
-            </div>
             <Paper className="p-4">
               <div className="flex gap-2">
                 <div className="flex flex-col gap-2.5">
@@ -62,6 +56,12 @@ export function GamePageView() {
                 </div>
               </div>
             </Paper>
+            <div className="flex flex-col items-center gap-4">
+              <p className="text-xl">Average user rating</p>
+              <div className="bg-green-700 rounded-lg h-10 w-10 flex justify-center items-center text-xl">
+                {reviewsData.averageRating}
+              </div>
+            </div>
             <Button onClick={handleClickAdd}>
               <GrAdd size={20} />
               <span className="ml-2">Add Review</span>

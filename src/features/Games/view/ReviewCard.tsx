@@ -16,7 +16,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
           <p className="italic text-sm">{`${GameStatusName[review.status]}`}</p>
           <div className="flex gap-2 ml-auto items-center">
             <p>Rating:</p>
-            <div className="bg-green-700 rounded-lg flex justify-center items-center p-0.5">
+            <div className="bg-green-700 w-8 h-8 rounded-lg flex justify-center items-center p-0.5">
               {review.score}
             </div>
           </div>
