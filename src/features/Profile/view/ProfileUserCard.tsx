@@ -4,10 +4,12 @@ import { Paper } from "../../../components/Paper";
 import { useRef, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { Button } from "../../../components/Button";
+import { getAvatarUrl } from "../../../utils/avatar";
 
 type ProfileUserCardProps = {
   profile: {
     bio: string;
+    avatarUrl: string;
   };
   userName: string;
   onSubmit: (data: { bio: string }) => void;
@@ -23,7 +25,7 @@ export function ProfileUserCard({
   totalReviews,
 }: ProfileUserCardProps) {
   const [bio, setBio] = useState(profile.bio || "");
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditingBio, setIsEditingBio] = useState(false);
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -31,13 +33,10 @@ export function ProfileUserCard({
     <div className="relative flex h-[300px] w-full">
       <div className="absolute bg-black h-[252px] w-(--standard-page) z-0 mt-16 rounded-4xl" />
       <div className="h-full flex flex-col justify-between z-10 p-2">
-        <img
-          src="/avatar_placeholder.png"
-          alt="avatar"
-          width={160}
-          height={160}
-          className="rounded-full border-secondary border-2 bg-primary"
-        />
+        <div className="rounded-full border-secondary border-2 bg-primary w-40 h-40 overflow-hidden">
+          <img src={getAvatarUrl(profile.avatarUrl)} alt="avatar" />
+        </div>
+        {/* <input type="file" accept="image/*" /> */}
         <div className="flex items-center mb-12 justify-center gap-4">
           <div className="flex flex-col items-center justify-center">
             <BiJoystick size={24} className="text-(--color-secondary)" />
@@ -59,16 +58,16 @@ export function ProfileUserCard({
               onChange={(e) => setBio(e.target.value)}
               className="w-full h-full bg-transparent text-white focus:outline-none"
               placeholder="Write your bio here..."
-              readOnly={!isEditing}
+              readOnly={!isEditingBio}
             />
           </Paper>
 
           <div className="flex justify-end mt-1 mr-2 items-center gap-1">
-            {!isEditing ? (
+            {!isEditingBio ? (
               <button
                 className="flex items-center gap-1 cursor-pointer"
                 onClick={() => {
-                  setIsEditing(true);
+                  setIsEditingBio(true);
                   textAreaRef.current?.focus();
                 }}
               >
@@ -79,7 +78,7 @@ export function ProfileUserCard({
               <>
                 <Button
                   onClick={() => {
-                    setIsEditing(false);
+                    setIsEditingBio(false);
                   }}
                   disabled={isSubmitting}
                   size="sm"
@@ -89,7 +88,7 @@ export function ProfileUserCard({
                 <Button
                   onClick={() => {
                     onSubmit({ bio });
-                    setIsEditing(false);
+                    setIsEditingBio(false);
                   }}
                   loading={isSubmitting}
                   size="sm"
