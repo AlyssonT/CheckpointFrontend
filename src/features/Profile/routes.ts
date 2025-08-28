@@ -14,4 +14,9 @@ export const profileRoutes: RouteObject[] = [
     action: updateProfileAction,
     loader: profileLoader,
   },
+  {
+    path: "/profile/:username",
+    element: createElement(Profile),
+    loader: profileLoader,
+  },
 ];

@@ -10,9 +10,11 @@ import type {
   UserGameReview,
 } from "../model/ProfileModels";
 
-export async function getUserProfile() {
+export async function getUserProfile(username: string) {
   try {
-    const response = await api.get<APIResponse<IGetProfile>>("/user/profile");
+    const response = await api.get<APIResponse<IGetProfile>>(
+      `/user/${username}/profile`,
+    );
     return response.data;
   } catch (e) {
     throwErrorWithAPIMessage(e);
@@ -34,10 +36,10 @@ export async function putUserProfile(bio: string) {
   }
 }
 
-export async function GetReviewsFromUser() {
+export async function GetReviewsFromUser(username: string) {
   try {
     const response = await api.get<APIResponse<GetUserReviewsResponse>>(
-      "user/games",
+      `user/${username}/games`,
     );
     return response.data.data;
   } catch (error) {

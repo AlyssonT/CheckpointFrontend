@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { GameStatusName, type ReviewResponse } from "../models/gameModels";
 
 type ReviewCardProps = {
@@ -12,7 +13,9 @@ export function ReviewCard({ review }: ReviewCardProps) {
       </div>
       <div className="w-full">
         <div className="flex gap-4 mb-3 items-center">
-          <p className="text-xl">{review.username}</p>
+          <Link to={`/profile/${review.username}`}>
+            <p className="text-xl hover:underline">{review.username}</p>
+          </Link>
           <p className="italic text-sm">{`${GameStatusName[review.status]}`}</p>
           <div className="flex gap-2 ml-auto items-center">
             <p>Rating:</p>

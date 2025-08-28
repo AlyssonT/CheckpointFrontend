@@ -6,9 +6,13 @@ import { Tooltip } from "../../../components/Tooltip";
 
 type ReviewCardProps = {
   review: UserGameReview;
+  disableEdit?: boolean;
 };
 
-export function ReviewCardGame({ review }: ReviewCardProps) {
+export function ReviewCardGame({
+  review,
+  disableEdit = false,
+}: ReviewCardProps) {
   const navigate = useNavigate();
   return (
     <div className="flex gap-4 items-center p-4">
@@ -32,16 +36,18 @@ export function ReviewCardGame({ review }: ReviewCardProps) {
             <div className="bg-green-700 w-8 h-8 rounded-lg flex justify-center items-center p-0.5">
               {review.score}
             </div>
-            <Tooltip title="Edit Review" className="flex items-center">
-              <button
-                className="cursor-pointer"
-                onClick={() =>
-                  navigate(`/games/${review.game.game_id}?editReview=true`)
-                }
-              >
-                <BiEdit size={24} />
-              </button>
-            </Tooltip>
+            {!disableEdit && (
+              <Tooltip title="Edit Review" className="flex items-center">
+                <button
+                  className="cursor-pointer"
+                  onClick={() =>
+                    navigate(`/games/${review.game.game_id}?editReview=true`)
+                  }
+                >
+                  <BiEdit size={24} />
+                </button>
+              </Tooltip>
+            )}
           </div>
         </div>
         <p className="text-sm w-full wrap-anywhere line-clamp-5">

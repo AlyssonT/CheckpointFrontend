@@ -16,6 +16,7 @@ export function ProfileView() {
           reviewsData={controller.reviewsData}
           username={controller.userName}
           userId={controller.profile.userID}
+          disableEdit={controller.disableEdit}
         />
       </div>
     </div>

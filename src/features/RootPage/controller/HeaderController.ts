@@ -33,7 +33,7 @@ export function useHeaderController() {
 
   const profileMenuData: ProfileMenuItem[] = [
     {
-      label: "My profile",
+      label: "Profile",
       onClick: (closeMenu) => {
         closeMenu();
         navigate("/profile");

@@ -1,7 +1,7 @@
 import { BiJoystick } from "react-icons/bi";
 import { TbStarsFilled } from "react-icons/tb";
 import { Paper } from "../../../components/Paper";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { Button } from "../../../components/Button";
 import { getAvatarUrl } from "../../../utils/avatar";
@@ -15,6 +15,7 @@ type ProfileUserCardProps = {
   onSubmit: (data: { bio: string }) => void;
   isSubmitting: boolean;
   totalReviews: number;
+  disableEdit?: boolean;
 };
 
 export function ProfileUserCard({
@@ -23,11 +24,16 @@ export function ProfileUserCard({
   isSubmitting,
   onSubmit,
   totalReviews,
+  disableEdit = false,
 }: ProfileUserCardProps) {
-  const [bio, setBio] = useState(profile.bio || "");
+  const [bio, setBio] = useState("");
   const [isEditingBio, setIsEditingBio] = useState(false);
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    setBio(profile.bio);
+  }, [profile.bio]);
 
   return (
     <div className="relative flex h-[300px] w-full">
@@ -62,7 +68,10 @@ export function ProfileUserCard({
             />
           </Paper>
 
-          <div className="flex justify-end mt-1 mr-2 items-center gap-1">
+          <div
+            className="flex justify-end mt-1 mr-2 items-center gap-1"
+            style={{ display: disableEdit ? "none" : "flex" }}
+          >
             {!isEditingBio ? (
               <button
                 className="flex items-center gap-1 cursor-pointer"

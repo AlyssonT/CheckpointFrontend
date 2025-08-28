@@ -7,6 +7,7 @@ export type IGetProfile = {
 export type ProfileLoaderData = {
   profile: IGetProfile;
   reviewsData: GetUserReviewsResponse;
+  username: string;
 };
 
 export type UserGameReview = {
