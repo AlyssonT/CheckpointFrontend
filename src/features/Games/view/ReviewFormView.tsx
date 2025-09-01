@@ -57,6 +57,7 @@ export function ReviewFormView({
                 label="Score"
                 type="number"
                 className="min-w-32.5"
+                autoComplete="off"
                 min={0}
                 max={100}
                 register={register}

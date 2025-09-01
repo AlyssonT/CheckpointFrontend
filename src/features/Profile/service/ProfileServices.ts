@@ -47,10 +47,10 @@ export async function GetReviewsFromUser(username: string) {
   }
 }
 
-export async function GetUserGameReviewById(gameId: number) {
+export async function GetUserGameReviewById(username: string, gameId: number) {
   try {
     const response = await api.get<APIResponse<UserGameReview>>(
-      `user/games/${gameId}`,
+      `user/${username}/games/${gameId}`,
     );
     return response.data.data;
   } catch (error) {

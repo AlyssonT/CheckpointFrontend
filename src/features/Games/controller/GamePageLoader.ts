@@ -1,6 +1,7 @@
 import type { Params } from "react-router";
 import { GetGameById, GetGameReviews } from "../service/GamesServices";
 import { GetUserGameReviewById } from "../../Profile/service/ProfileServices";
+import { useAuthStore } from "../../../stores/authStore";
 
 export async function gamePageLoader({
   params,
@@ -22,7 +23,7 @@ export async function gamePageLoader({
         page: parseInt(page),
         pageSize: parseInt(pageSize),
       }),
-      GetUserGameReviewById(gameId),
+      GetUserGameReviewById(useAuthStore.getState().user.name, gameId),
     ]);
 
     return {
