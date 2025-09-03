@@ -11,14 +11,14 @@ export type ProfileLoaderData = {
 };
 
 export type UserGameReview = {
-  game: {
+  game: Partial<{
     game_id: number;
     metacritic: number;
     slug: string;
     name: string;
     description: string;
     imagem: string;
-  };
+  }>;
   status: number;
   score: number;
   review: string;

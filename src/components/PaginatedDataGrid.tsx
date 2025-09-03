@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Paper } from "./Paper";
 import { Button } from "./Button";
 import { useSearchParams } from "react-router";
@@ -10,6 +10,7 @@ interface PaginatedDataGridProps<T> {
   getItemId: (item: T) => string | number;
   title?: string;
   totalItems: number;
+  divided?: boolean;
 }
 
 export function PaginatedDataGrid<T>({
@@ -18,6 +19,7 @@ export function PaginatedDataGrid<T>({
   getItemId,
   title,
   totalItems,
+  divided = false,
 }: PaginatedDataGridProps<T>) {
   if (items.length === 0) return null;
 
@@ -55,7 +57,10 @@ export function PaginatedDataGrid<T>({
       <h2>{title}</h2>
       <div className="flex flex-col gap-2">
         {items.map((item) => (
-          <div key={getItemId(item)}>{renderRow(item)}</div>
+          <div key={getItemId(item)}>
+            {renderRow(item)}
+            {divided && <div className="w-full h-[1px] bg-secondary" />}
+          </div>
         ))}
       </div>
       <div className="flex items-center p-2 gap-4">

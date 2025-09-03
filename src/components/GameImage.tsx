@@ -1,8 +1,17 @@
 import { FaImage } from "react-icons/fa";
 
-export function GameImage({ image }: { image: string }) {
+export function GameImage({
+  image,
+  size = "lg",
+}: {
+  image?: string;
+  size?: "sm" | "lg";
+}) {
+  const h = size === "sm" ? "h-32" : "h-64";
+  const w = size === "sm" ? "w-24" : "w-48";
+
   return (
-    <div className="h-64 w-48 flex shrink-0 items-center justify-center">
+    <div className={`${h} ${w} flex shrink-0 items-center justify-center`}>
       {image && image.length > 0 ? (
         <img
           src={image}

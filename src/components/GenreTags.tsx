@@ -1,7 +1,7 @@
 import type { Genre } from "../features/Games/models/gameModels";
 
 interface GenreTagsProps {
-  genres: Genre[] | null;
+  genres: Genre[] | null | undefined;
   className?: string;
 }
 

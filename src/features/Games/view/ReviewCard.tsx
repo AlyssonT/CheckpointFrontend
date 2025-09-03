@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { GameStatusName, type ReviewResponse } from "../models/gameModels";
 
 type ReviewCardProps = {
-  review: ReviewResponse;
+  review: Partial<ReviewResponse>;
 };
 
 export function ReviewCard({ review }: ReviewCardProps) {
@@ -16,7 +16,9 @@ export function ReviewCard({ review }: ReviewCardProps) {
           <Link to={`/profile/${review.username}`}>
             <p className="text-xl hover:underline">{review.username}</p>
           </Link>
-          <p className="italic text-sm">{`${GameStatusName[review.status]}`}</p>
+          <p className="italic text-sm">{`${
+            GameStatusName[review.status ?? 0]
+          }`}</p>
           <div className="flex gap-2 ml-auto items-center">
             <p>Rating:</p>
             <div className="bg-green-700 w-8 h-8 rounded-lg flex justify-center items-center p-0.5">
@@ -24,9 +26,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
             </div>
           </div>
         </div>
-        <p className="text-sm w-full wrap-anywhere line-clamp-5">
-          {review.review}
-        </p>
+        <p className="text-sm w-full line-clamp-5">{review.review}</p>
       </div>
     </div>
   );

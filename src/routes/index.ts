@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import { RootPage } from "../features/RootPage";
 import { loginRoutes } from "../features/Login/routes";
 import { registerRoutes } from "../features/Register/routes";
@@ -8,6 +8,7 @@ import { createElement } from "react";
 import { gamesRoutes } from "../features/Games/routes";
 import { CircularFallback } from "../components/CircularFallback";
 import { UnknownError } from "../components/UnknownError";
+import { homeRoutes } from "../features/Home/routes";
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,11 @@ export const router = createBrowserRouter([
     element: createElement(RootPage),
     HydrateFallback: () => createElement(CircularFallback, { full: true }),
     children: [
+      {
+        index: true,
+        element: createElement(Navigate, { to: "/home", replace: true }),
+      },
+      ...homeRoutes,
       ...loginRoutes,
       ...registerRoutes,
       ...profileRoutes,
