@@ -37,7 +37,7 @@ export function ProfileUserCard({
 
   return (
     <div className="relative flex h-[300px] w-full">
-      <div className="absolute bg-black h-[252px] w-(--standard-page) z-0 mt-16 rounded-4xl" />
+      <div className="absolute bg-black h-[252px] w-[100vw] md:w-[800px] z-0 mt-16 rounded-4xl" />
       <div className="h-full flex flex-col justify-between z-10 p-2">
         <div className="rounded-full border-secondary border-2 bg-primary w-40 h-40 overflow-hidden">
           <img src={getAvatarUrl(profile.avatarUrl)} alt="avatar" />
