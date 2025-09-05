@@ -3,6 +3,9 @@ import { CiSearch } from "react-icons/ci";
 import { useHeaderController } from "../controller/HeaderController";
 import { Popover } from "../../../components/Popover";
 import { Paper } from "../../../components/Paper";
+import { useResponsive } from "../../../hooks/useResponsive";
+import { SessionView } from "./SessionView";
+import { FaBars } from "react-icons/fa";
 
 export function HeaderView() {
   const {
@@ -17,13 +20,37 @@ export function HeaderView() {
     profileMenuData,
   } = useHeaderController();
 
+  const { isMobile, isDesktop } = useResponsive();
+
+  const SessionComponent = isMobile ? (
+    <Popover anchor={<FaBars />} anchorPos="br" popoverPos="tr">
+      {(helpers) => (
+        <SessionView
+          handleLoginClick={() => {
+            handleLoginClick();
+            helpers.close();
+          }}
+          handleRegisterClick={() => {
+            handleRegisterClick();
+            helpers.close();
+          }}
+        />
+      )}
+    </Popover>
+  ) : (
+    <SessionView
+      handleLoginClick={handleLoginClick}
+      handleRegisterClick={handleRegisterClick}
+    />
+  );
+
   return (
     <header className="fixed h-16 bg-primary shadow border-b-1 border-gray-900 z-50 w-full grid grid-cols-3 items-center">
-      <div className="ml-16">
+      <div className="ml-6 md:ml-16">
         <img
-          src="/logo_typography.svg"
+          src={!isDesktop ? "/logo_robozin.svg" : "/logo_typography.svg"}
           height={32}
-          width={160}
+          width={!isDesktop ? 32 : 160}
           style={{ objectFit: "contain", cursor: "pointer" }}
           alt="Logo"
           onClick={handleLogoClick}
@@ -32,7 +59,7 @@ export function HeaderView() {
       <div className="flex items-center justify-center">
         <input
           value={searchQuery}
-          className="rounded-4xl bg-tertiary focus:outline-0 px-4 py-1 text-black min-w-96"
+          className="rounded-4xl bg-tertiary focus:outline-0 px-4 py-1 text-black min-w-48 sm:min-w-64 md:min-w-96"
           spellCheck={false}
           onKeyDown={handleSearch}
           onChange={handleSearchChange}
@@ -47,7 +74,7 @@ export function HeaderView() {
         {isLoggedIn ? (
           <Popover
             anchor={
-              <div className="flex space-x-2 items-center min-w-24">
+              <div className="flex space-x-2 items-center w-24">
                 <img
                   src="/avatar_placeholder.png"
                   alt="avatar"
@@ -76,14 +103,7 @@ export function HeaderView() {
             )}
           </Popover>
         ) : (
-          <div className="flex space-x-2">
-            <Button variant="contained" size="sm" onClick={handleLoginClick}>
-              Login
-            </Button>
-            <Button variant="outlined" size="sm" onClick={handleRegisterClick}>
-              Sign Up
-            </Button>
-          </div>
+          SessionComponent
         )}
       </div>
     </header>
