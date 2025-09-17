@@ -35,7 +35,7 @@ export function Highlights({ topGames, latestReviews }: HighlightsProps) {
       <Paper className="w-full md:w-3/5 p-4">
         <h1 className="mb-2 text-lg">Latest Reviews:</h1>
         {latestReviews.map((review, i) => (
-          <Fragment>
+          <Fragment key={review.user.name + "-" + review.game.game_id}>
             <ReviewCardGame
               disableEdit
               key={review.user.name + "_" + review.game.name}
