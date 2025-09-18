@@ -4,6 +4,7 @@ import { Paper } from "../../../components/Paper";
 import type { Game } from "../models/gameModels";
 import { GenreTags } from "../../../components/GenreTags";
 import { SiIgdb } from "react-icons/si";
+import { useResponsive } from "../../../hooks/useResponsive";
 
 type GameCardProps = {
   game: Partial<Game>;
@@ -21,23 +22,46 @@ export function GameCard({
     ? () => navigate(`/games/${game.game_id}`)
     : undefined;
 
+  const { isMobile } = useResponsive();
+
   return (
     <Paper
       onClick={handleClickCard}
-      className="flex w-full gap-4 p-4 cursor-pointer bg-gradient-to-r from-primary to-[#160700]"
+      className="flex flex-col sm:flex-row w-full gap-4 p-4 cursor-pointer bg-gradient-to-r from-primary to-[#160700]"
     >
-      <GameImage image={game.imagem} size={cardSize} />
-      <div>
-        <h3 className={`${cardSize === "sm" ? "text-md" : "text-2xl"}`}>
-          {game.name}
-        </h3>
-        <p className="text-sm mt-6 mb-6 mr-4 line-clamp-7 max-w-xl text-justify">
-          {game.description}
-        </p>
-        <GenreTags genres={game.genres} className="mr-4" />
+      <div className="flex gap-4">
+        <GameImage image={game.imagem} size={isMobile ? "sm" : cardSize} />
+        <div className="flex-1">
+          <h3 className={`${cardSize === "sm" ? "text-md" : "text-2xl"}`}>
+            {game.name}
+          </h3>
+          <p className="text-sm mt-6 mb-6 mr-4 line-clamp-7 max-w-xl text-justify">
+            {game.description}
+          </p>
+          <GenreTags genres={game.genres} className="mr-4" />
+
+          {game.metacritic && game.metacritic > 0 && (
+            <div className="flex md:hidden justify-center items-center mt-4">
+              <Link
+                to={"https://www.igdb.com/games/" + game.slug}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex flex-col justify-center items-center cursor-pointer">
+                  <SiIgdb size={42} />
+                  <div className="flex justify-center items-center bg-green-700 rounded-lg h-10 w-10">
+                    {game.metacritic}
+                  </div>
+                </div>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
-      {game.metacritic && game.metacritic > 0 ? (
-        <div className="flex justify-end items-center mr-4 ml-auto min-w-8">
+
+      {game.metacritic && game.metacritic > 0 && (
+        <div className="hidden md:flex justify-end items-center mr-4 ml-auto min-w-8">
           <Link
             to={"https://www.igdb.com/games/" + game.slug}
             target="_blank"
@@ -52,7 +76,7 @@ export function GameCard({
             </div>
           </Link>
         </div>
-      ) : null}
+      )}
     </Paper>
   );
 }

@@ -23,11 +23,11 @@ export function GamePageView() {
   } = useGamePageController();
 
   return (
-    <div className="w-full h-auto flex justify-center py-8">
-      <div className="w-(--standard-page) flex flex-col gap-4">
+    <div className="w-full h-auto flex justify-center py-8 overflow-x-hidden">
+      <div className="w-19/20 md:w-(--standard-page) flex flex-col gap-4">
         <GameCard game={gameData} disableCardClick />
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-evenly gap-12">
+          <div className="flex flex-col md:flex-row items-center justify-evenly gap-12">
             <Paper className="p-4">
               <div className="flex gap-2">
                 <div className="flex flex-col gap-2.5">
