@@ -74,7 +74,7 @@ export function HeaderView() {
         {isLoggedIn ? (
           <Popover
             anchor={
-              <div className="flex space-x-2 items-center w-24">
+              <div className="flex space-x-2 items-center justify-center">
                 <img
                   src="/avatar_placeholder.png"
                   alt="avatar"
@@ -82,9 +82,11 @@ export function HeaderView() {
                   height={32}
                   className="rounded-full border-secondary border-2"
                 />
-                <p>{user.name}</p>
+                {isDesktop && <p>{user.name}</p>}
               </div>
             }
+            anchorPos="br"
+            popoverPos="tr"
           >
             {({ close }) => (
               <Paper className="p-2 bg-primary flex-col">

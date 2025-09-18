@@ -6,8 +6,8 @@ export function ListGamesView() {
   const { query, gamesData } = useListGamesController();
 
   return (
-    <div className="w-full h-auto flex justify-center py-8">
-      <div className="w-(--standard-page)">
+    <div className="w-full h-auto flex justify-center py-8 overflow-x-hidden">
+      <div className="w-19/20 md:w-(--standard-page)">
         {query && <h1 className="text-2xl mb-2">Results for "{query}":</h1>}
         <PaginatedDataGrid
           items={gamesData.games}
